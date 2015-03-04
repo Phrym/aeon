@@ -1,0 +1,38 @@
+
+web1:
+  name: aeon
+  shared_writable_dirs:
+    - /storage/cache
+    - /storage/database
+    - /storage/logs
+    - /storage/sessions
+    - /storage/views
+    - /storage/work
+  document_root: /public/
+  php_version: 5.4.0
+  php_extensions:
+    - pdo_mysql
+    - mcrypt
+    - eaccelerator
+    - memcached
+    - curl
+    - mysqli
+    - mysql
+    - pdo_mysql
+    - mbstring
+    - apc
+    - zip
+  after_build:
+    - "if [ ! -f composer.phar ]; then curl -s http://getcomposer.org/installer | php; fi; php composer.phar install --prefer-source"  
+  before_deploy:
+    - "php artisan migrate:install"
+    - "php artisan migrate --force"
+    - "php artisan db:seed --force"
+  after_deploy:
+    - "rm -f storage/cache/*"
+    - "rm -f storage/views/*"
+  cache1:
+    type: memcached
+  db1:
+    type: mysql
+   

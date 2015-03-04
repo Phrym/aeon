@@ -68,8 +68,9 @@ return array(
 	*/
 
 	'memcached' => array(
-
-		array('host' => '127.0.0.1', 'port' => 11211, 'weight' => 100),
+		// Pagoda Box Deploy Support	
+		array('host' => 'tunnel.pagodabox.com', 'port' => 11211, 'weight' => 100),
+	//	array('host' => '127.0.0.1', 'port' => 11211, 'weight' => 100),
 
 	),
 

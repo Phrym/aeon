@@ -27,7 +27,8 @@ return array(
 	*/
 
 	// use the default connection for development mode
-	'default' => 'mysql',
+	'default' => 'scheduler',
+//	'default' => 'mysql',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -54,10 +55,10 @@ return array(
 		// password
 		'scheduler' => array(
 			'driver'    => 'mysql',
-			'host'      => 'localhost',
-			'database'  => 'scheduler',
-			'username'  => 'MySQLUserName',
-			'password'  => 'MySQLPassword',
+			'host'     	=> $_SERVER['DB1_HOST'],
+            'database' 	=> $_SERVER['DB1_NAME'],
+            'username' 	=> $_SERVER['DB1_USER'],
+            'password' 	=> $_SERVER['DB1_PASS'],
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
