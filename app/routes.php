@@ -81,7 +81,7 @@ Route::group(['prefix' => 'admin'], function()
 |	
 */
 
-Route::controller('/install','InstallController');
+//Route::controller('/install','InstallController');
 
 
 Route::controller('/','PagesController');

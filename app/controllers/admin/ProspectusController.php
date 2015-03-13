@@ -136,7 +136,7 @@ class ProspectusController extends Admin
 		}
 
 		return Redirect::to('admin/subject')
-					->with('success_message', 'New subject Object Updated Successfully!');
+					->with('success_message', 'New Subject Object Updated Successfully!');
 	}
 
 
@@ -148,7 +148,16 @@ class ProspectusController extends Admin
 	 */
 	public function destroy($id)
 	{
-		$this->storage->delete($id);
+	if(Auth::user()->hasRole('delete_subject'))
+		{
+			$this->storage->delete($id);
+
+			return Redirect::to('admin/subject')
+					->with('success_message', 'Subject Object Updated Successfully!');
+		}
+
+		return Redirect::to('admin/subject')
+					->with('error_message', 'You are not Authorized to do certain action!');
 	}
 
 }

@@ -1,16 +1,21 @@
 <?php
 
+ use \Aeon\Transformer\StaffTransformer as StaffTransformer;
+
  class AdminController extends Admin
  {
 
  	protected $app;
 
+ 	protected $transformer;
+
  	protected $data;
 
- 	public function __construct(\Aeon\Aeon $app)
+ 	public function __construct(\Aeon\Aeon $app, StaffTransformer $s)
  	{
  		parent::__construct();
 		$this->app = $app;
+		$this->transformer = $s;
 		$this->data = $this->app->setApplicationSetting();
  	}
 
@@ -38,11 +43,16 @@
  		}
  		else
  		{
-
- 			return Response::make( View::make('admin.administrative_option_account', $this->data), 200);
+ 			$this->data['item'] = $this->transformer->transform(\Staff::find($name));
+ 			return Response::make( View::make('admin.account', $this->data), 200);
  		}
  	}
 
+ 	public function getEdit()
+ 	{
+
+ 	}
+ 	
  	public function postConfig()
  	{
  		$val = Validator::make(Input::all(), XConfig::$rules);

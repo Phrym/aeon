@@ -22,7 +22,7 @@ class ChronosRepository implements ChronosRepositoryInterface
 
 	public function findByBachelorId($id)
 	{
-		return \Bachelor::find($id)->schedule()->orderBy('time_in_hour')->get();
+		return \Bachelor::find($id)->schedule()->orderBy('day_id')->get();
 	}
 
 	public function delete($id) 

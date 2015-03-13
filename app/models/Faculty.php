@@ -18,4 +18,9 @@ class Faculty extends Eloquent
 	{
 		return $this->belongsTo('Staff');
 	}
+
+	public function schedule()
+	{
+		return $this->hasMany('Timeplot');
+	}
 }

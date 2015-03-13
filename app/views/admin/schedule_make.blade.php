@@ -14,7 +14,7 @@
             <p>{{ $message }}</p>
         </div>
     @endforeach
-    <? // get all course, faculty, and room related to this object ?>
+    <?php // get all course, faculty, and room related to this object ?>
     <div class="col-md-12">
       <p>Shift: {{ ucfirst( $schedules->shift ) }}</p>
       <div class="row">
@@ -94,7 +94,7 @@
             22 => '10 PM',
             23 => '11 PM',
             24 => '12 AM'
-          ],  7, ['class' => 'form-control']) }}
+          ],  7, ['class' => 'form-control', 'id' => 'timeInHour', 'onChange' => 'changeTimeOut()']) }}
           </div>
           <div class="col-md-1">
             <b>Minutes</b>
@@ -138,7 +138,7 @@
             22 => '10 PM',
             23 => '11 PM',
             24 => '12 AM'
-          ],  7, ['class' => 'form-control']) }}
+          ],  7, ['class' => 'form-control', 'id' => 'timeOutHour', 'onchange' => 'changeEval()']) }}
           </div>
           <div class="col-md-1">
             <b>Minutes</b>
@@ -158,9 +158,6 @@
 <script type="text/javascript">
   $(function() {
      $("#scheduleForm").submit(function(e) {
-        $("#message_success").hide();
-        $("#message_handle").hide();
-        $("#validation_handle").hide();
         //prevent Default functionality
         e.preventDefault();
 
@@ -222,5 +219,23 @@
             }
           }});
       }
+
+      function changeTimeOut()
+      {
+        $("#timeOutHour").val($("#timeInHour").val());
+      }
+
+      function changeEval()
+      {
+        var timeout = $("#timeOutHour").val();
+        var timein  = $("#timeInHour").val();
+
+        if(timeout < timein)
+        {
+          alert("Time Out Cannot be less than the Time In");
+          changeTimeOut();
+        }
+      }
+
 </script>
 @stop

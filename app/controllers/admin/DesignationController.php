@@ -130,7 +130,7 @@ class DesignationController extends Admin
 		$this->storage->delete($id);
 
 		return Redirect::to('admin/designation')
-					->with('success_message', 'designation Object Deleted Successfully!');
+					->with('success_message', 'Designation Object Deleted Successfully!');
 	}
 
 }

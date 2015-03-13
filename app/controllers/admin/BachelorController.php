@@ -120,10 +120,16 @@ class BachelorController extends Admin
 	 */
 	public function destroy($id)
 	{
-		$this->storage->delete($id);
+		if(Auth::user()->hasRole('delete_course'))
+		{
+			$this->storage->delete($id);
+
+			return Redirect::to('admin/bachelor')
+					->with('success_message', 'Bachelor Object Updated Successfully!');
+		}
 
 		return Redirect::to('admin/bachelor')
-					->with('success_message', 'Bachelor Degree Object Deleted Successfully!');
+					->with('error_message', 'You are not Authorized to do certain action!');
 	}
 
 }

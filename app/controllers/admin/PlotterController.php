@@ -225,29 +225,9 @@ class PlotterController extends Admin
  			$time_end 			= $chronos->getTimeEnd();
  			$schedules 			= $this->storage->findByBachelorId($id);
 
- 		//	return Response::make( View::make('admin.scheduler', $this->data), 200);
- 		
- 			$printPDF = "<html>
- 				<body>";
- 			$printPDF .= "<center>Cebu Technological University</center><br />";
- 			$printPDF .= "<center>Tuburan, Cebu</center>";
- 			$printPDF .= "<table>";
- 				foreach ($schedules as $schedule) 
- 				{
- 					
- 					$printPDF .= "<div style=\"background:#00eeff;margin:5px;\">";
- 					$printPDF .= "Instructor: ".$schedule->faculty()->get()->first()->staff()->get()->first()->last_name.", ".$schedule->faculty()->get()->first()->staff()->get()->first()->first_name;
- 					$printPDF .= "<br />Room: ".$schedule->room()->get()->first()->code;
- 					$printPDF .= "<br />Subject: ".Prospectus::find($schedule->prospectus_id)->code;
- 					$printPDF .= "<br />Time In:<b>$schedule->time_in_hour</b><br />";
- 					$printPDF .= "Time Out:<b>$schedule->time_out_hour</b><br />";
- 					$printPDF .= "</div>";
- 				}
-
- 			$printPDF .= "</table>";
- 			$printPDF .= "</body>
- 			</html>";
- 			return PDF::load($printPDF, 'A4', 'portrait')->show();
+ 			$readyToPrint = $this->app->PDFScheduleDesigner($schedules);
+ 			
+ 			return PDF::load($readyToPrint, 'A4', 'portrait')->show();
  		}
  		else
  		{

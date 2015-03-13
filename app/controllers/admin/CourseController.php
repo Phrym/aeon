@@ -124,10 +124,16 @@ class CourseController extends Admin
 	 */
 	public function destroy($id)
 	{
-		$this->storage->delete($id);
+		if(Auth::user()->hasRole('delete_degree'))
+		{
+			$this->storage->delete($id);
+
+			return Redirect::to('admin/course')
+					->with('success_message', 'Course Object Updated Successfully!');
+		}
 
 		return Redirect::to('admin/course')
-					->with('success_message', 'course Degree Object Deleted Successfully!');
+					->with('error_message', 'You are not Authorized to do certain action!');
 	}
 
 }

@@ -6,7 +6,7 @@
 	@section('body')
 	<div class="alert alert-success">
         <button type="button" class="close" data-dismiss="alert">×</button>
-        <p>Nope</p>
+        <p>You are using Aeon Project v{{ \Aeon\Aeon::version()->version.".".\Aeon\Aeon::version()->minor_revision.".".\Aeon\Aeon::version()->patch }}. [<a href="#">Updater Script Under Development</a>]</p>
     </div>
     <div class="col-md-12">
     	<div class="row">
@@ -23,7 +23,7 @@
     			</a>		
     		</div>
     		<div class="col-md-4">
-    			<a href="{{ URL::to('admin/plotter') }}" class="btn btn-primary btn-lg">
+    			<a href="{{ URL::to('admin/schedule') }}" class="btn btn-primary btn-lg">
         	    	<span class="fa fa-pencil-square-o fa-5x"></span>
         	    	<p>Schedule Management</p>
     			</a>	
@@ -40,14 +40,8 @@
         	    	<p>My Account</p>
     			</a>	
     		</div>
-			<div class="col-md-4">
-    			<a href="{{ URL::to('admin/account') }}" class="btn btn-material-light-green btn-lg">
-        	    	<span class="fa fa-cogs fa-5x"></span>
-        	    	<p>Aeon Behaviour Configs</p>
-    			</a>
-    		</div>
     		<div class="col-md-4">
-    			<a href="{{ URL::to('admin/plotter') }}" class="btn btn-primary btn-lg">
+    			<a href="{{ URL::to('logout') }}" class="btn btn-primary btn-lg">
         	    	<span class="fa fa-pencil-square-o fa-5x"></span>
         	    	<p>Logout</p>
     			</a>	

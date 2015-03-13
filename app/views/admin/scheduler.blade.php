@@ -46,8 +46,7 @@
                 <small><p class="AeonElementText">{{ $s->faculty()->get()->first()->staff()->get()->first()->last_name.", ".$s->faculty()->get()->first()->staff()->get()->first()->first_name }}</p></small>
                 <small><p class="AeonElementText">{{ $s->room()->get()->first()->code }}</p></small>
                 <small><p class="AeonElementText">{{ Prospectus::find($s->prospectus_id)->code }}</p></small>
-                <a href="{{ URL::to('admin/schedule/editschedule/'.$s->id) }}" class="iconize pull-left"><span class="fa fa-pencil-square-o"></span></a>
-                <a href="{{ URL::to('admin/schedule/deleteschedule/'.$s->id) }}" class="iconize pull-right"><span class="fa fa-trash-o"></span></a>         
+                <a href="{{ URL::to('admin/schedule/deleteschedule/'.$s->id) }}" class="iconize" style="color:#ff0000;"><span class="fa fa-trash-o"></span></a>         
               </div>
               <?php $last_row_hour_position = $s->time_out_hour ?>
               <?php $last_row_minute_position = $s->time_out_minute ?>     

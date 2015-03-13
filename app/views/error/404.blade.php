@@ -60,7 +60,7 @@
 			<div class="content">
 				<div class="header">The Portal to Time Travel is broken!</div>
 				<div class="title">Dead End Bruh!</div>
-				<div class="title"><a href="{{ URL::to('/') }}">Get me outta here!</a></div>
+				<a href="{{ URL::to('/') }}" align="center">Get me outta here!</a>
 			</div>
 
 		</div>

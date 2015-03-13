@@ -5,6 +5,7 @@ class UserTransformer extends Transformer
 	public function transform($user)
 	{
 		return [
+			'_id'	=> $user['id'],
 			'username' => $user['username'],
 			'firstname' => $user['staff']['first_name'],
 			'middlename' => $user['staff']['middle_name'],

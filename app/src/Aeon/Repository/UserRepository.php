@@ -41,7 +41,7 @@ class UserRepository implements UserRepositoryInterface
 		{
 			$user = $this->model->find($id);
 			
-			if($user->username == Input::get('username') || $user->staff_id == Input::get('staff_id'))
+			if($user->username == \Input::get('username') || $user->staff_id == \Input::get('staff_id'))
 			{
 				$validation = \Validator::make($input, [
 					'username'   => 'required|min:5',
@@ -49,18 +49,18 @@ class UserRepository implements UserRepositoryInterface
 	    	        'staff_id'   => 'numeric'
 				]);	
 			}
-			elseif($user->username == Input::get('username'))
+			elseif($user->username == \Input::get('username'))
 			{
 				$validation = \Validator::make($input, [
 					'username'   => 'required|min:5',
 					'password'   => 'required|alphaNum|min:5|max:15',
-	    	        'staff_id'   => 'unique:user,staff_id|numeric'
+//	    	        'staff_id'   => 'unique:user,staff_id|numeric'
 				]);
 			}
 			else
 			{
 				$validation = \Validator::make($input, [
-					'username'   => 'required|unique:user,username|min:5',
+					'username'   => 'required|min:5',
 					'password'   => 'required|alphaNum|min:5|max:15',
 	    	        'staff_id'   => 'numeric'
 				]);
@@ -69,11 +69,11 @@ class UserRepository implements UserRepositoryInterface
 		
 		if($validation->fails()) return $validation;
 
-		$user->username = Input::get('username');
-		$user->password = Hash::make(Input::get('password'));
-		$user->staff_id = Input::get('staff_id');
-		$user->authorizeUser('basic');
+		$user->username = \Input::get('username');
+		$user->password = \Hash::make(\Input::get('password'));
+		if(\Input::get('staff_id')) $user->staff_id = \Input::get('staff_id');
 		$user->save();
+		$user->authorizeUser('worker');
 	}
 
 	public function userSetPerm($id, $permissionLevel)

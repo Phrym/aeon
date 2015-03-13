@@ -59,19 +59,25 @@ class FacultyController extends Admin
 	 */
 	public function store()
 	{
-		$status = $this->storage->create(Input::all());
-		
-		// tells if our repository returns a validation object
-		// if true it means validation failed or error occured
-		if($status)
+		if(Input::get('staff_id'))
 		{
-			return Redirect::to('admin/faculty/create')
-					->withErrors($status)
-					->withInput(Input::all());
+			$status = $this->storage->create(Input::all());
+		
+			// tells if our repository returns a validation object
+			// if true it means validation failed or error occured
+			if($status)
+			{
+				return Redirect::to('admin/faculty/create')
+						->withErrors($status)
+						->withInput(Input::all());
+			}
+
+			return Redirect::to('admin/faculty')
+						->with('success_message', 'New faculty Object Created Successfully!');		
 		}
 
 		return Redirect::to('admin/faculty')
-							->with('success_message', 'New faculty Object Created Successfully!');
+						->with('success_message', 'Cannot Add Blank');		
 	}
 
 	/**
@@ -80,11 +86,17 @@ class FacultyController extends Admin
 	 * @param  int  $id
 	 * @return Response
 	 */
-//	public function show($id)
-//	{
-//		$this->data['item'] = $this->transformer->transform($this->storage->find($id));
-//		return Response::make( View::make('admin.faculty_view', $this->data), 200);
-//	}
+	public function show($id)
+	{
+		$this->data['item'] = $this->transformer->transform($this->storage->find($id));
+		$this->data['units'] = 0;
+		foreach(Faculty::find($id)->schedule()->get() as $f)
+		{
+			$this->data['units'] += Prospectus::find($f->prospectus_id)->units;
+		}
+
+		return Response::make( View::make('admin.faculty_view', $this->data), 200);
+	}
 
 	/**
 	 * Show the form for editing the specified resource.
@@ -97,7 +109,6 @@ class FacultyController extends Admin
 		$this->data['item'] = $this->transformer->transform($this->storage->find($id));
 		return Response::make( View::make('admin.faculty_edit', $this->data), 200);
 	}
-
 
 	/**
 	 * Update the specified resource in storage.
@@ -131,7 +142,16 @@ class FacultyController extends Admin
 	 */
 	public function destroy($id)
 	{
-		$this->storage->delete($id);
+		if(Auth::user()->hasRole('delete_faculty'))
+		{
+			$this->storage->delete($id);
+
+			return Redirect::to('admin/faculty')
+					->with('success_message', 'Faculty Object Updated Successfully!');	
+		}
+
+		return Redirect::to('admin/faculty')
+					->with('error_message', 'You are not Authorized to do certain action!');
 	}
 
 }

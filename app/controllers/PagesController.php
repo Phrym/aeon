@@ -11,11 +11,17 @@ class PagesController extends BaseController {
 
 	protected $facultyContainer;
 
-	public function __construct(Aeon $app, Chronosphere $chronosphere, \Faculty $f)
+	protected $chronos;
+
+	protected $app;
+
+	public function __construct(Aeon $app, Chronosphere $chronosphere, \Faculty $f,\Aeon\Library\Chronos\Repository\ChronosRepositoryInterface $chronos)
 	{
+		$this->app = $app;
 		$this->data = $app->setApplicationSetting();
 		$this->storage = $chronosphere;
 		$this->facultyContainer = $f;
+		$this->chronos = $chronos;
 		//$this->beforeFilter('checkInstallation');
 		$this->data['days'] = Day::orderBy('count')->get();
 		$this->beforeFilter('csrf', array('on'=>'post'));
@@ -36,7 +42,7 @@ class PagesController extends BaseController {
 
 	public function getHelp()
 	{	
-		return View::make('about',$this->data);
+		return View::make('help',$this->data);
 	}
 
 	public function postLogin()
@@ -73,7 +79,9 @@ class PagesController extends BaseController {
 	public function getSchedule()
 	{
 		$course = Input::get('courses');
- 		
+ 	
+		$this->data['days'] = Day::orderBy('count')->get();
+		$this->data['courses'] = \Bachelor::where('isOffered', '=', true)->select(DB::raw('concat(concat(code, "-",year), " ",section) as curriculum, id'))->groupBy('curriculum')->get();	
  		if(Bachelor::find($course))
  		{
 
@@ -103,6 +111,32 @@ class PagesController extends BaseController {
  		$this->data['schedules'] 	= \Bachelor::find($id);
  		return Response::make(View::make('schedule.view',$this->data)->withInputs(Input::all()), 200);
 	}
+
+	public function getTopdf($id)
+ 	{
+
+ 		if(Bachelor::find($id))
+ 		{
+
+	 		$chronos = new \Aeon\Library\Chronos\Chronos;
+ 			$curriculum 		= Bachelor::find($id);
+ 			$scheduleBundle 	= $chronos->getTimeSettings();
+ 			$time_start 		= $chronos->getTimeStart();
+ 			$time_end 			= $chronos->getTimeEnd();
+ 			$schedules 			= $this->chronos->findByBachelorId($id);
+
+ 		//	return Response::make( View::make('admin.scheduler', $this->data), 200);
+ 		
+
+ 			$readyToPrint = $this->app->PDFScheduleDesigner($schedules);
+ 			
+ 			return PDF::load($readyToPrint, 'A4', 'portrait')->show();
+ 		}
+ 		else
+ 		{
+ 			return Response::make(View::make('error.404', $this->data), 404);
+ 		}
+ 	}
 
 	public function getLogout()
 	{

@@ -13,7 +13,7 @@
         <link rel="stylesheet" type="text/css" href="{{ URL::asset('/assets/css/font-awesome.css') }}"> 
         <link rel="stylesheet" href="{{ URL::asset('/assets/css/material-wfont.css') }}">
         <link href="{{ URL::asset('/assets/css/dashboard.css') }}" rel="stylesheet">
-        <link rel="shortcut icon" href="{{ URL::asset(  '/'.$short_icon ) }}">
+        <link rel="shortcut icon" href="{{ URL::asset('/assets/img/ico.ico') }}">
         @yield('extra-css')
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -64,7 +64,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="{{ URL::to('admin') }}">{{ $short_title }}</a>
+          <a class="navbar-brand" href="{{ URL::to('admin') }}"><img src="{{ URL::to('/assets/img/logo.png') }}" width="28px" height="28px">&nbsp;{{ $short_title }}</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
@@ -93,17 +93,17 @@
         @endif
         <ul class="nav nav-sidebar">
             <li class="active"><a href="#">Management <span class="sr-only">(current)</span></a></li>
-            <li><a href="{{ URL::to('admin/faculty') }}">Faculties</a></li>
+            <li><a href="{{ URL::to('admin/faculty') }}"><span class="fa fa-users"></span>&nbsp; Faculties</a></li>
             @if(Auth::user()->hasRole('global'))
-            <li><a href="{{ URL::to('admin/room') }}">Rooms</a></li>
-            <li><a href="{{ URL::to('admin/subject') }}">Subjects</a></li>
+            <li><a href="{{ URL::to('admin/room') }}"><span class="fa fa-university"></span>&nbsp;Rooms</a></li>
+            <li><a href="{{ URL::to('admin/subject') }}"><span class="fa fa-book"></span>&nbsp;Subjects</a></li>
             @endif
-            <li><a href="{{ URL::to('admin/schedule') }}">Schedules</a></li>  
+            <li><a href="{{ URL::to('admin/schedule') }}"><span class="fa fa-calendar-o"></span>&nbsp;Schedules</a></li>  
         </ul>
         <ul class="nav nav-sidebar">
-            <li><a href="{{ URL::to('help') }}">Help</a></li>
-            <li><a href="{{ URL::to('about') }}">About</a></li>
-            <li><a href="{{ URL::to('logout') }}">Logout</a></li>
+            <li><a href="{{ URL::to('help') }}"><span class="fa fa-question-circle"></span>&nbsp;Help</a></li>
+            <li><a href="{{ URL::to('about') }}"><span class="badge">{{ \Aeon\Aeon::version()->version.".".\Aeon\Aeon::version()->minor_revision.".".\Aeon\Aeon::version()->patch }}</span>&nbsp;About</a></li>
+            <li><a href="{{ URL::to('logout') }}"><span class="fa fa-sign-out"></span>&nbsp;Logout</a></li>
         </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -190,6 +190,7 @@
             $("#message_handle").hide();
             $("#message_success").hide();
             $("#validation_handle").hide();
+            
             $.material.init();
         });
 

@@ -14,7 +14,7 @@
     <h2>Schedule for {{ $curriculum->code."-".$curriculum->year.$curriculum->section }}</h2>
    </div>
    <div class="col-md-4">
-      <a href="{{ URL::to('admin/schedule/topdf/'.$curriculum->id) }}" class="btn btn-material-teal">Print</a>
+      <a href="{{ URL::to('topdf/'.$curriculum->id) }}" class="btn btn-material-teal">Print</a>
    </div>   
   </div>
   <div ng-controller="AeonScheduleWidget" class="AeonScheduleWidgetStyleBasic">

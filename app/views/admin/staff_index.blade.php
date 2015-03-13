@@ -69,3 +69,5 @@
 		</table>
         {{ $data->links() }}
 @stop
+@section('extra-js')
+@stop

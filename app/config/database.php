@@ -27,8 +27,8 @@ return array(
 	*/
 
 	// use the default connection for development mode
-	'default' => 'scheduler',
-//	'default' => 'mysql',
+//	'default' => 'scheduler',
+	'default' => 'mysql',
 
 	/*
 	|--------------------------------------------------------------------------

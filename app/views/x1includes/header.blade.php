@@ -1,1 +1,0 @@
-<?php //call from theme

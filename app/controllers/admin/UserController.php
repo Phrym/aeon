@@ -28,7 +28,15 @@ class UserController extends Admin
 
 	public function index()
 	{
-		$this->data['data'] = $this->transformer->transformCollection( $this->storage->all()->toArray() ) ;
+		
+		$paginator = $this->transformer->transformCollection( $this->storage->all()->toArray() );
+    	$perPage = 15;   
+    	$page = Input::get('page', 1);
+    	if ($page > count($paginator) or $page < 1) { $page = 1; }
+    	$offset = ($page * $perPage) - $perPage;
+    	$articles = array_slice($paginator,$offset,$perPage);
+    	$this->data['data'] = Paginator::make($articles, count($paginator), $perPage);
+
 		return Response::make( View::make('admin.user_index', $this->data), 200);
 	}
 
@@ -50,20 +58,18 @@ class UserController extends Admin
 	 */
 	public function store()
 	{
-		$status = $this->storage->create(Input::all());
+		$status = $this->storage->createOrUpdate(Input::all());
 		
 		// tells if our repository returns a validation object
 		// if true it means validation failed or error occured
 		if($status)
 		{
-			return Redirect::to('admin/user')
+			return Redirect::to('admin/user/create')
 					->withErrors($status)
 					->withInput(Input::all());
 		}
 
-		return Response::make( View::make('admin.user_index', $this->data)
-									->with('success_message', 'New user Object Created Successfully!')
-									,201);
+		return Redirect::to('admin/user')->with('success_message','Created Successfully!');
 	}
 
 	/**
@@ -99,7 +105,7 @@ class UserController extends Admin
 	 */
 	public function update($id)
 	{
-		$status = $this->storage->edit($id, Input::all());
+		$status = $this->storage->createOrUpdate($id, Input::all());
 
 		// tells if our repository returns a validation object
 		// if true it means validation failed or error occured
@@ -122,10 +128,18 @@ class UserController extends Admin
 	 */
 	public function destroy($id)
 	{
-		$this->storage->delete($id);
+
+		if(Auth::user()->hasRole('delete_faculty'))
+		{
+			$this->storage->delete($id);
+
+			return Redirect::to('admin/user')
+						->with('success_message', 'User Object Deleted Successfully!');
+		}
 
 		return Redirect::to('admin/user')
-					->with('success_message', 'User Object Deleted Successfully!');
+					->with('error_message', 'You are not Authorized to do certain action!');
+
 	}
 
 }

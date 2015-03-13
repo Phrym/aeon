@@ -78,11 +78,11 @@ class RoomController extends Admin
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
-	{
-		$this->data['item'] = $this->transformer->transform($this->storage->find($id));
-		return Response::make( View::make('admin.room_view', $this->data), 200);
-	}
+//	public function show($id)
+//	{
+//		$this->data['item'] = $this->transformer->transform($this->storage->find($id));
+//		return Response::make( View::make('admin.room_view', $this->data), 200);
+//	}
 
 	/**
 	 * Show the form for editing the specified resource.
@@ -117,7 +117,7 @@ class RoomController extends Admin
 		}
 
 		return Redirect::to('admin/room')
-					->with('success_message', 'room Object Updated Successfully!');
+					->with('success_message', 'Room Object Updated Successfully!');
 	}
 
 
@@ -129,7 +129,16 @@ class RoomController extends Admin
 	 */
 	public function destroy($id)
 	{
-		$this->storage->delete($id);
+		if(Auth::user()->hasRole('delete_room'))
+		{
+			$this->storage->delete($id);
+
+			return Redirect::to('admin/room')
+					->with('success_message', 'Room Object Updated Successfully!');
+		}
+
+		return Redirect::to('admin/room')
+					->with('error_message', 'You are not Authorized to do certain action!');
 	}
 
 }

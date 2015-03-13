@@ -1,25 +1,55 @@
-## Laravel PHP Framework
+Aeon Project 2.0.0 Final
+--------------------------------------
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/downloads.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+This is the Final and End of Support for this Project. I decided to discontinue this project due to the lack of time, and support. IF ever there's a person who'll find this system interesting and willing to continue the existing work, Please feel free and safe to modify the existing work BUT never forget to give a proper credit to the original discoverer or developer. I am hoping to see people who'll continue this job. Thanks.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, and caching.
+Introduction
+--------------------------------------
+Aeon Project (aeon schedule management system) former Clockwork Scheduling System is a free open sourced (also a failure) Schedule Management System made primarily for Cebu Technological University of Tuburan, this system aims to help and provide ease to schedulers who uses the old and complex method of scheduling and also students who are eagerly waiting for the schedule to come.
 
-Laravel aims to make the development process a pleasing one for the developer without sacrificing application functionality. Happy developers make the best code. To this end, we've attempted to combine the very best of what we have seen in other web frameworks, including frameworks implemented in other languages, such as Ruby on Rails, ASP.NET MVC, and Sinatra.
+Changelogs:
 
-Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+version 2.0.0-final
+	- Implemented delete_ Authorization Role
+version 2.0.0-test#4
+	- Pagodabox Initial Support (incomplete)
+	- Conflict Checker
+	- Pagination
+	- PDF Converter added
+	- Installation Wizard (incomplete)
+version 2.0.0-test#3
+	- Faster Schedule Table Display
+	- OAuth2 Implementation (incomplete)
+	- Elevated Authorization Added (incomplete)
+	- uses Material Design
+	- switched to Laravel 4.2
+version 1.2.1
+	- (bug) slow querying
+	- made using customized Model Controller View Design Pattern
 
-## Official Documentation
 
-Documentation for the entire framework can be found on the [Laravel website](http://laravel.com/docs).
+To do:
+	- Account Settings
+	- Updater
+	- Installer
+	- Table in PDF
+	- Units Display (done)
+	- Implementation of all Roles
+	- Typographic Errors
+	- OAuth2
 
-### Contributing To Laravel
+Future Plan:
+	- base schedules on timestamps in order to separate old schedules from new.
+	- AJAX implementation
+	- chat server
+	- notifications
 
-**All issues and pull requests should be filed on the [laravel/framework](http://github.com/laravel/framework) repository.**
 
-### License
+Info:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+/app/src/Aeon 						- Contains the codes made by me.
+/app/src/Aeon/Library/Chronos/ 		- Contains the codes responsible for Scheduling and Time Value
+/app/src/Aeon/Library/Chameleon.php - Theming (-started only 1%)
+/app/src/Repository/ 				- Contains the Files that acts as a storage
+/app/src/Transformer/				- Contains the Files that transforms the data given by our Repo
+

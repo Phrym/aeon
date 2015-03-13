@@ -148,10 +148,17 @@ class StaffController extends Admin
 	 */
 	public function destroy($id)
 	{
-		$this->storage->delete($id);
+		if(Auth::user()->hasRole('delete_staff'))
+		{
+			$this->storage->delete($id);
+
+			return Redirect::to('admin/staff')
+					->with('success_message', 'Staff Object Deleted Successfully!');			
+		}
 
 		return Redirect::to('admin/staff')
-					->with('success_message', 'Staff Object Deleted Successfully!');
+					->with('error_message', 'You are not Authorized to do certain action!');
+
 	}
 
 }

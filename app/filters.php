@@ -56,7 +56,7 @@ Route::filter('checkAccess', function()
 	if( !isset($user) || !Auth::user()->hasRole('basic_authentication_access'))
 	{
 		if(isset($user)) Auth::logout();
-		return Redirect::to('/')->with('error_message','You are not authorized to access this content! Sorry.');
+		return Redirect::to('/index')->with('error_message','You are not authorized to access this content! Sorry.');
 	}
 });
 

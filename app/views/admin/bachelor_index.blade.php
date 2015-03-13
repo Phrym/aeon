@@ -4,7 +4,7 @@
 
 <div class="col-md-12">
   <div class="col-md-6">
-    <h2> Bachelor Degree List </h2>
+    <h2> Course List </h2>
   </div>
   <div class="col-md-6">
     <a href="{{ URL::to('admin/bachelor/create') }}" class="btn btn-fab btn-fab-mini btn-raised btn-sm btn-success pull-right" title="Add Bachelor"><span class="glyphicon glyphicon-plus"></span></a>

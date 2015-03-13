@@ -12,6 +12,17 @@ class Aeon
 		$this->getConfig();
 	}
 
+	//
+	//	From version 2.1.1
+	public static function version()
+	{
+		if(file_get_contents('version.json')) {
+			$version = file_get_contents('version.json');
+			$version = json_decode($version);		
+			return $version;
+		}	
+	}
+
 	public function setApplicationSetting()
 	{
 		$data_size = count($this->data);
@@ -36,5 +47,31 @@ class Aeon
 	public function getConfig()
 	{
 		$this->data = $this->config->all();
+	}
+
+	public static function PDFScheduleDesigner($collection)
+	{
+		$printPDF = "<html>
+ 						<head>
+	 						
+ 						</head>
+		 				<body>";
+ 			$printPDF .= "<center>Cebu Technological University</center><br />";
+ 			$printPDF .= "<center>Tuburan, Cebu</center>";
+ 				foreach ($collection as $schedule) 
+ 				{
+ 					
+ 					$printPDF .= "<div style=\"margin:5px;\">";
+ 					$printPDF .= "<b>".\Aeon\Library\Chronos\Chronos::displayRealTimeRangeVal($schedule->time_in_hour,$schedule->time_in_minute,$schedule->time_out_hour,$schedule->time_out_minute)." (".\Day::find($schedule->day_id)->day.") "."</b><br />";
+ 					$printPDF .= "<small>Instructor: ".$schedule->faculty()->get()->first()->staff()->get()->first()->last_name.", ".$schedule->faculty()->get()->first()->staff()->get()->first()->first_name[0].".";
+ 					$printPDF .= "<br />Room: ".$schedule->room()->get()->first()->code;
+ 					$printPDF .= "<br />Subject: ".\Prospectus::find($schedule->prospectus_id)->code;
+
+ 					$printPDF .= "</div>";
+ 				}
+ 			$printPDF .= "</body>
+ 			</html>";		
+
+ 			return $printPDF;
 	}
 }
