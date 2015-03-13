@@ -1,7 +1,6 @@
-~~Aeon Project 2.0.0 Final
+Aeon Project 2.0.6
 --------------------------------------
 
-This is the Final and End of Support for this Project. I decided to discontinue this project due to the lack of time, and support. IF ever there's a person who'll find this system interesting and willing to continue the existing work, Please feel free and safe to modify the existing work BUT never forget to give a proper credit to the original discoverer or developer. I am hoping to see people who'll continue this job. Thanks. ~~
 
 Introduction
 --------------------------------------
