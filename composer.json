@@ -1,0 +1,45 @@
+{
+    "name": "yakovmeister/aeon",
+    "description": "Application I made to understand more about laravel",
+    "require-dev": {
+         "way/generators": "~2.0"
+    },
+      "repositories": [{
+        "type": "package",
+        "package": {
+        "name": "yakovmeister/chameleon",
+        "version": "1.0.0",
+        "source": {
+            "url": "https://github.com/yakovmeister/chameleon.git",
+            "type": "git",
+            "reference": "1.0.0"
+           }
+        }
+    },
+    {
+        "type": "package",
+        "package": {
+        "name": "yakovmeister/aeon",
+        "version": "3.0.0",
+        "source": {
+            "url": "https://github.com/yakovmeister/aeon.git",
+            "type": "git",
+            "reference": "3.0.0"
+           }
+        }
+    }],
+    "require": {
+        "laravel/laravel": "4.2.*",
+        "lucadegasperi/oauth2-server-laravel": "3.*",
+        "thujohn/pdf": "dev-master",
+        "yakovmeister/aeon" : "3.0.0",
+        "yakovmeister/chameleon" : "1.0.0"
+    },
+    "authors": [
+        {
+            "name": "Jacob Baring",
+            "email": "electro7bug@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}

@@ -1,0 +1,11 @@
+# Created by https://www.gitignore.io
+
+### Laravel ###
+/vendor
+/workbench
+/composer.lock
+/composer.phar
+/themes
+.env.*.php
+.env.php
+.env
